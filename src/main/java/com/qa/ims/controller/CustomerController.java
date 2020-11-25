@@ -1,5 +1,6 @@
 package com.qa.ims.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,58 +27,51 @@ public class CustomerController implements CrudController<Customer> {
 		this.utils = utils;
 	}
 
-	/**
-	 * Reads all customers to the logger
-	 */
 	@Override
 	public List<Customer> readAll() {
-		List<Customer> customers = customerDAO.readAll();
+		ArrayList<Customer> customers = (ArrayList<Customer>) customerDAO.readAll();
 		for (Customer customer : customers) {
 			LOGGER.info(customer.toString());
 		}
 		return customers;
+		
 	}
 
-	/**
-	 * Creates a customer by taking in user input
-	 */
 	@Override
 	public Customer create() {
-		LOGGER.info("Please enter a first name");
-		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
-		String surname = utils.getString();
-		Customer customer = customerDAO.create(new Customer(firstName, surname));
+		LOGGER.info("Please enter a name");
+		String customer_name = utils.getString();
+		LOGGER.info("Please enter an email");
+		String email = utils.getString();
+		LOGGER.info("Please enter a changeable password for the new customer");
+		String password = utils.getString();
+		Customer customer = customerDAO.create(new Customer(customer_name, email, password));
 		LOGGER.info("Customer created");
 		return customer;
 	}
 
-	/**
-	 * Updates an existing customer by taking in user input
-	 */
 	@Override
 	public Customer update() {
 		LOGGER.info("Please enter the id of the customer you would like to update");
 		Long id = utils.getLong();
-		LOGGER.info("Please enter a first name");
-		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
-		String surname = utils.getString();
-		Customer customer = customerDAO.update(new Customer(id, firstName, surname));
+		LOGGER.info("Please enter a new name");
+		String customer_name = utils.getString();
+		LOGGER.info("Please enter a new email");
+		String email = utils.getString();
+		LOGGER.info("Please enter a new password");
+		String password = utils.getString();
+		Customer customer = customerDAO.update(new Customer(id, customer_name, email, password));
 		LOGGER.info("Customer Updated");
 		return customer;
 	}
 
-	/**
-	 * Deletes an existing customer by the id of the customer
-	 * 
-	 * @return
-	 */
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the id of the customer you would like to delete");
-		Long id = utils.getLong();
-		return customerDAO.delete(id);
+		Long customer_id = utils.getLong();
+		return customerDAO.delete(customer_id);
 	}
+
+
 
 }

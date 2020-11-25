@@ -2,50 +2,70 @@ package com.qa.ims.persistence.domain;
 
 public class Customer {
 
-	private Long id;
-	private String firstName;
-	private String surname;
-
-	public Customer(String firstName, String surname) {
-		this.firstName = firstName;
-		this.surname = surname;
+	//database fields as variables
+	private Long customer_ID;
+	private String customer_name;
+	private String email;
+	private String password;
+	
+	//constructors
+	public Customer(String customer_name, String email, String password) {
+		super();
+		this.customer_name = customer_name;
+		this.email = email;
+		this.password = password;
 	}
-
-	public Customer(Long id, String firstName, String surname) {
-		this.id = id;
-		this.firstName = firstName;
-		this.surname = surname;
+	public Customer(Long customer_ID, String customer_name, String email, String password) {
+		super();
+		this.customer_ID = customer_ID;
+		this.customer_name = customer_name;
+		this.email = email;
+		this.password = password;
 	}
-
-	public Long getId() {
-		return id;
+	//getters and setters
+	public Long getCustomer_ID() {
+		return customer_ID;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setCustomer_ID(Long customer_ID) {
+		this.customer_ID = customer_ID;
 	}
-
-	public String getFirstName() {
-		return firstName;
+	public String getCustomer_name() {
+		return customer_name;
 	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
 	}
-
-	public String getSurname() {
-		return surname;
+	public String getEmail() {
+		return email;
 	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 
+	
 	@Override
 	public String toString() {
-		return "id:" + id + " first name:" + firstName + " surname:" + surname;
+		return "Customer id: "+customer_ID + ", Name: "+ customer_name+", Email: "+email +", Password: "+ password;
+}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((customer_ID == null) ? 0 : customer_ID.hashCode());
+		result = prime * result + ((customer_name == null) ? 0 : customer_name.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,22 +75,31 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (firstName == null) {
-			if (other.firstName != null)
+		if (customer_ID == null) {
+			if (other.customer_ID != null)
 				return false;
-		} else if (!firstName.equals(other.firstName))
+		} else if (!customer_ID.equals(other.customer_ID))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (customer_name == null) {
+			if (other.customer_name != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!customer_name.equals(other.customer_name))
 			return false;
-		if (surname == null) {
-			if (other.surname != null)
+		if (email == null) {
+			if (other.email != null)
 				return false;
-		} else if (!surname.equals(other.surname))
+		} else if (!email.equals(other.email))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
 			return false;
 		return true;
 	}
+	
+
+	
+	
 
 }
