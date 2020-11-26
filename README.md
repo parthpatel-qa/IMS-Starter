@@ -1,7 +1,7 @@
-Coverage: 34%
+Coverage: 64%
 # Inventory Management System - QA Week 5 Individual Project
 
-This inventory management system is a [JAVA](https
+This inventory management system is a Java based application which is designed to store customer information.
 
 ## Getting Started
 
