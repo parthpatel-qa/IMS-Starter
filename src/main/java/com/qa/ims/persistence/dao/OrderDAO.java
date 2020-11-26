@@ -1,6 +1,7 @@
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.persistence.domain.OrderLine;
 import com.qa.ims.utils.DBUtils;
 
 
@@ -19,6 +21,7 @@ public class OrderDAO implements Dao<Order>{
 	
 	public static final Logger LOGGER = LogManager.getLogger();
 	ItemDAO itemDAO = new ItemDAO();
+	List<OrderLine> orderline = new ArrayList<>();
 
 	@Override
 	public List<Order> readAll() {
@@ -27,6 +30,10 @@ public class OrderDAO implements Dao<Order>{
 				ResultSet resultSet = statement.executeQuery("Select * FROM Orders");){
 					List<Order> orders = new ArrayList<>();
 					while (resultSet.next()) {
+						Long oid = resultSet.getLong("order_ID");
+						OrderDAO dao = new OrderDAO();
+						
+						orderline = dao.readLines(oid);
 						orders.add(modelFromResultSet(resultSet));
 					}
 					return orders;
@@ -36,13 +43,13 @@ public class OrderDAO implements Dao<Order>{
 				}
 			return new ArrayList<>();
 	}
-
+ 
 	@Override
 	public Order create(Order orders) {
+		String query = "Insert into Orders (customer_id, date_placed) values ('" + orders.getCustomer_ID() + ","+orders.getDate_Placed()+"');";
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("INSERT INTO Orders(customer_ID, date_placed, total) values('" + orders.getCustomer_ID()
-					+ "','" + orders.getDate() + "," +orders.getTotal() + "')");
+			statement.executeUpdate(query);
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -54,7 +61,7 @@ public class OrderDAO implements Dao<Order>{
 	public Order readOrders(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Orders where order_ID = " + id);) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Orders where id = " + id);) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -70,9 +77,9 @@ public class OrderDAO implements Dao<Order>{
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
 				statement.executeUpdate("update Orders set customer_ID ='" + orders.getCustomer_ID() + "', dateplaced ='"
-					+ orders.getDate() +  "', total ='"
+					+ orders.getDate_Placed() +  "', total ='"
 					+ orders.getTotal());
-			return readOrders(orders.getOrder_id());
+			return readOrders(orders.getOrder_ID());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
@@ -96,17 +103,13 @@ public class OrderDAO implements Dao<Order>{
 	public Order modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long oid = resultSet.getLong("order_ID");
 		Long cid = resultSet.getLong("customer_ID");
-		List<Item> items = readLines(resultSet.getLong("item_ID"));
-		for(Item item: items) {
-			item.setQuantity(1L);
-		}
+		Date date = resultSet.getDate("date_placed");
 		Double total = resultSet.getDouble("total");
-		String date = resultSet.getString("date");
 	
-	return new Order(oid, cid, items, total, date);
+	return new Order(oid, cid, date, total, orderline);
 	}
 	
-	public List<Item> readLines(Long id) {
+	public List<OrderLine> readLines(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderline where order_ID = " + id);) {
@@ -114,12 +117,12 @@ public class OrderDAO implements Dao<Order>{
 			while (resultSet.next()) {
 				items.add(itemDAO.readItem(resultSet.getLong("item_ID")));
 			}
-			return items;
+			return orderline;
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-		return null;
+		return new ArrayList<>();
 	}
 	
 	public Order readLatest() {

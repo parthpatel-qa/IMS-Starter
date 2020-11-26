@@ -1,7 +1,7 @@
 Coverage: 34%
-# Project Title
+# Inventory Management System - QA Week 5 Individual Project
 
-One Paragraph of project description goes here
+This inventory management system is a [JAVA](https
 
 ## Getting Started
 

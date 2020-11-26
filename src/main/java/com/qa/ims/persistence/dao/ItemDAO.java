@@ -39,7 +39,7 @@ public class ItemDAO implements Dao<Item>{
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("INSERT INTO Items(item, quantity, price) values('" + items.getItem_name()
-					+ "','" + items.getQuantity() + "','" + items.getPrice() + "')");
+			+ "','" + items.getQuantity() + "','" +items.getPrice()+ "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -77,11 +77,11 @@ public class ItemDAO implements Dao<Item>{
 
 	@Override
 	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long Item_id = resultSet.getLong("ID");
+		Long item_ID = resultSet.getLong("ID");
 		String item = resultSet.getString("Item name");
 		Long Quantity = resultSet.getLong("Quantity");
-		Double Price = resultSet.getDouble("Quantity");
-		return new Item(Item_id, item, Quantity, Price);
+		Double Price = resultSet.getDouble("Price");
+		return new Item(item_ID, item, Quantity, Price);
 	}
  
 	public Item readItem(Long id) {
@@ -100,7 +100,7 @@ public class ItemDAO implements Dao<Item>{
 	public Item readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Items ORDER BY id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Items ORDER BY item_ID DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {

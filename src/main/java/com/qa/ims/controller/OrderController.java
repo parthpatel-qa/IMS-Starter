@@ -1,5 +1,7 @@
 package com.qa.ims.controller;
-
+ 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +12,7 @@ import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.persistence.domain.OrderLine;
 import com.qa.ims.utils.Utils;
 
 
@@ -43,20 +46,17 @@ public class OrderController implements CrudController<Order>{
 
 	@Override
 	public Order create() {
-		List<Customer> customers = customerDAO.readAll();
-		for (Customer customer : customers) {
-			LOGGER.info(customer.toString());
-		}
-		LOGGER.info("To create an order, you will need a customer. Please enter a customer ID");
-		long customer_ID = utils.getLong();
-		System.out.println("Please enter a order date (in the format YYYY-MM-DD)");
-		String date = utils.getString();
-		System.out.println("What is the total?m");
-		Double total = utils.getDouble();
-		Order order = orderDAO.create(new Order(customer_ID, null, null, total, date));
+		LOGGER.info("Please enter the Customer ID");
+		Long customerID = utils.getLong();
+		LOGGER.info("Please enter the date(YYYY-MM-DD)");
+		String str = utils.getString();
+		Date date = Date.valueOf(str);
+		Order order = orderDAO.create(new Order(customerID, date));
 		LOGGER.info("Order created");
 		return order;
-	}
+}
+ 	
+		
 	
 
 	@Override

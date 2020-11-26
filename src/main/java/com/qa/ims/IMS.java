@@ -33,7 +33,7 @@ public class IMS {
 		this.customers = new CustomerController(custDAO, utils);
 		this.items = new ItemController(itemDAO, utils);
 		this.orders = new OrderController(orderDAO, utils, custDAO, itemDAO);
-	}
+	} 
 
 	public void imsSystem() {
 		LOGGER.info("What is your username");
@@ -57,10 +57,10 @@ public class IMS {
 					active = this.customers;
 					break;
 				case ITEM:
-					active = null;
+					active = this.items;
 					break;
 				case ORDER:
-					active = null;
+					active = this.orders;
 					break;
 				case STOP:
 					return;
