@@ -25,20 +25,43 @@ mvn -version
 
 ### Installing
 
-Git bash into your folder and clone this repository down for you to use.
+1. Git bash into your folder and clone this repository down for you to use.
 
 Use this line
 ```
 git clone https://github.com/parthpatel-qa/IMS-Starter.git
 ```
 
-Open this project in your desired IDE
+2. Open this project in your desired IDE
 
 ```
-<img width="500" height="350" src="./Documentation/DBUtils.png">
+In eclipse that would be File>Import>Maven>ExistingMavenProjects>Find the file>Finish
+<p align="center">
+<img width="500" height="350" src="./Documentation/Eclipse.png">
+</p>
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+3. I have set the Database URL to a local host but you can change it to anything you require in src/main/java/utils/DBUTils.java
+```
+DB_URL = "jdbc:mysql://localhost.3306/ims";
+```
+
+4. Direct yourself to the Runner.Java and run as Java Application
+USERNAME:
+```
+root
+```
+PASSWORD:
+```
+root
+```
+5. From here you will be able to choose which domain you want to work with or exit the application
+```
+<p align="center">
+<img width="500" height="350" src="./Documentation/Domain.png">
+</p>
+```
+
 
 ## Running the tests
 
