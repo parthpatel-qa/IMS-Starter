@@ -16,24 +16,26 @@ What things you need to install the software and how to install them
 3. A running local SQL Server
 4. Maven
 5. Git
+
+To ensure you have javan and maven installed, run the following lines in your terminal
 ```
 java -version
+mvn -version
 ```
 
 ### Installing
 
 Git bash into your folder and clone this repository down for you to use.
 
-Say what the step will be
+Use this line
+```
+git clone https://github.com/parthpatel-qa/IMS-Starter.git
+```
+
+Open this project in your desired IDE
 
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+<img width="500" height="350" src="./Documentation/DBUtils.png">
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
