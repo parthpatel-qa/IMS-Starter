@@ -1,23 +1,28 @@
 Coverage: 64%
 # Inventory Management System - QA Week 5 Individual Project
 
-This inventory management system is a Java based application which is designed to store customer information.
+This inventory management system is a Java based application which is designed to store customer information. This online database contains tables which house orders and items through which a user is able to create, view, update, or delete said orders.
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
-
+1. Java14
+2. An IDE of your choice
+3. A running local SQL Server
+4. Maven
+5. Git
 ```
-Give examples
+java -version
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Git bash into your folder and clone this repository down for you to use.
 
 Say what the step will be
 

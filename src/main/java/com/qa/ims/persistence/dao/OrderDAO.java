@@ -76,7 +76,7 @@ public class OrderDAO implements Dao<Order>{
 	public Order update(Order orders) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-				statement.executeUpdate("update Orders set customer_ID ='" + orders.getCustomer_ID() + "', dateplaced ='"
+				statement.executeUpdate("update Orders set customer_ID ='" + orders.getCustomer_ID() + "', date_placed ='"
 					+ orders.getDate_Placed() +  "', total ='"
 					+ orders.getTotal());
 			return readOrders(orders.getOrder_ID());
