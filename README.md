@@ -38,7 +38,7 @@ git clone https://github.com/parthpatel-qa/IMS-Starter.git
 In eclipse that would be File>Import>Maven>ExistingMavenProjects>Find the file>Finish
 ```
 <p align="center">
-<img width="500" height="350" src="./Documentation/Eclipse.png">
+<src="./Documentation/Eclipse.png">
 </p>
 
 
