@@ -38,7 +38,7 @@ git clone https://github.com/parthpatel-qa/IMS-Starter.git
 In eclipse that would be File>Import>Maven>ExistingMavenProjects>Find the file>Finish
 ```
 <p align="center">
-<src="./Documentation/Eclipse.png">
+<src="Documentation/Eclipse.png">
 </p>
 
 
@@ -59,7 +59,7 @@ root
 5. From here you will be able to choose which domain you want to work with or exit the application
 
 <p align="center">
-<img width="500" height="350" src="./Documentation/Domain.png">
+<img src="Documentation/Domains.png">
 </p>
 
 6. The Simplest way to test whether the system is working choose a domain to work with:
@@ -95,7 +95,7 @@ src/test/java
 Used JUnit to test Customer, Items, and Orders
 
 <p align="center">
-<img width="500" height="350" src="./Documentation/testDomain.png">
+<img src="Documentation/testDomain.png">
 </p>
 
 
@@ -103,18 +103,14 @@ Used JUnit to test Customer, Items, and Orders
 These Data Accessor Objects are there to link the domain and database and were tested using JUnit
 
 <p align="center">
-<img width="500" height="350" src="/c/Users/parth/OneDrive/Desktop/ims/IMS-Starter/Documentation/TestDAO.PNG
-">
+<img src="Documentation/TestDAO.PNG">
 </p>
 
 #### Controller
 Mockito was used to test these Controllers and looks as such
 
 <p align="center">
-<img width="500" height="350" src="./Documentation/testController.png">
-</p>
-<p>
-src=/c/Users/parth/OneDrive/Desktop/ims/IMS-Starter/Documentation/TestDAO.PNG
+<img src="Documentation/testController.png">
 </p>
 
 ## Deployment
