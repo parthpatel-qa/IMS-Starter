@@ -59,7 +59,7 @@ root
 5. From here you will be able to choose which domain you want to work with or exit the application
 
 <p align="center">
-<img src="Documentation/Domains.png">
+<img src="Documentation/Domains.PNG">
 </p>
 
 6. The Simplest way to test whether the system is working choose a domain to work with:
@@ -95,7 +95,7 @@ src/test/java
 Used JUnit to test Customer, Items, and Orders
 
 <p align="center">
-<img src="Documentation/testDomain.png">
+<img src="Documentation/testDomain.PNG">
 </p>
 
 
@@ -110,7 +110,7 @@ These Data Accessor Objects are there to link the domain and database and were t
 Mockito was used to test these Controllers and looks as such
 
 <p align="center">
-<img src="Documentation/testController.png">
+<img src="Documentation/testController.PNG">
 </p>
 
 ## Deployment
